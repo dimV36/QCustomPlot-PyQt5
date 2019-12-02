@@ -115,7 +115,7 @@ class MyBuilderExt(build_ext):
         print('Make static qcustomplot library...')
         self.spawn([self.qmake, join(ROOT, 'QCustomPlot/src/qcp-staticlib.pro')])
         # AFAIK only nmake does not support -j option
-        has_multiprocess = not(WINDOWS_HOST and "nmake"in self.make)
+        has_multiprocess = not(WINDOWS_HOST and "nmake" in self.make)
         make_cmdline = [self.make]
         if has_multiprocess:
             make_cmdline.extend(('-j', str(os.cpu_count())))
@@ -184,5 +184,6 @@ setup(
         'sipconfig',
         'PyQt5'
     ],
-    cmdclass={'build_ext': MyBuilderExt}
+    cmdclass={'build_ext': MyBuilderExt},
+    zip_safe=False
 )
